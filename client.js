@@ -1,10 +1,7 @@
 function consultarRestaurantes(){
     $.ajax({
         url: "http://localhost:8080/restaurantes",
-        type: "get",
-        headers : {
-            "X-Teste": "Abc"
-        },
+        type: "get",        
 
         success: function(response){
             $("#conteudo").text(JSON.stringify(response));
@@ -23,4 +20,15 @@ function fecharRestaurante(){
     });
 }
 
-$("#botao").click(consultarRestaurantes);
+function consultarCozinhas(){
+    $.ajax({
+        url: "http://localhost:8080/cozinhas",
+        type: "get",        
+
+        success: function(response){
+            $("#conteudo").text(JSON.stringify(response));
+        }
+    });
+}111
+
+$("#botao").click(consultarCozinhas);
