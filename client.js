@@ -1,4 +1,34 @@
-function consultarRestaurantes(){
+function consultar(){
+    $.ajax({
+        url: "http://localhost:8080/formapagamentos",
+        type: "get",        
+
+        success: function(response){
+            preencherTabela(response);
+        }
+    });
+}
+
+function preencherTabela(formasPagamento){
+    $("#tabela tbody tr").remove();
+
+    $.each(formasPagamento, function(i, formasPagamento){
+        var linha = $("<tr>");
+
+        linha.append(
+            $("<td>").text(formasPagamento.id),
+            $("<td>").text(formasPagamento.descricao)
+        );
+
+        linha.appendTo("#tabela");
+    });
+}
+
+$("#btn-consultar").click(consultar);
+
+
+
+/*function consultarRestaurantes(){
     $.ajax({
         url: "http://localhost:8080/restaurantes",
         type: "get",        
@@ -31,4 +61,4 @@ function consultarCozinhas(){
     });
 }111
 
-$("#botao").click(consultarCozinhas);
+$("#botao").click(consultarCozinhas);*/
