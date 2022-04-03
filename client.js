@@ -1,6 +1,6 @@
 function consultar(){
     $.ajax({
-        url: "http://localhost:8080/formapagamentos",
+        url: "http://localhost:8080/formas-pagamento",
         type: "get",        
 
         success: function(response){
@@ -17,7 +17,7 @@ function cadastrar(){
     console.log(formapagamentoJson);
 
     $.ajax({
-        url: "http://localhost:8080/formapagamentos",
+        url: "http://localhost:8080/formas-pagamento",
         type: "post",
         data: formapagamentoJson,
         contentType: "application/json",
@@ -40,7 +40,7 @@ function cadastrar(){
 
 function excluir (formaPagamento){
     
-    var url = "http://localhost:8080/formapagamentos/" + formaPagamento.id;
+    var url = "http://localhost:8080/formas-pagamento/" + formaPagamento.id;
 
    $.ajax({
     url: url,
