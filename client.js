@@ -38,15 +38,50 @@ function cadastrar(){
     
 }
 
+function excluir (formaPagamento){
+    
+    var url = "http://localhost:8080/formapagamentos/" + formaPagamento.id;
+
+   $.ajax({
+    url: url,
+    type: "delete",    
+
+    success: function(response){
+        consultar();
+
+        alert("Forma de pagamento removida!");
+    },
+
+    error: function(error){
+        //tratando todos os erros da categoria 4xx
+        if(error.status >= 400 &&  error.status <= 499){
+            var problem = JSON.parse(error.responseText);
+            alert(problem.userMessage);
+        }else{
+            alert("Error ao remover forma de pagamento!");
+        }
+    }
+});
+}
+
+
 function preencherTabela(formasPagamento){
     $("#tabela tbody tr").remove();
 
     $.each(formasPagamento, function(i, formasPagamento){
         var linha = $("<tr>");
 
+        var linkAcao = $("<a href='#'>")
+            .text("Excluir")
+            .click(function(event){
+                event.preventDefault();
+                excluir(formasPagamento);
+            });
+
         linha.append(
             $("<td>").text(formasPagamento.id),
-            $("<td>").text(formasPagamento.descricao)
+            $("<td>").text(formasPagamento.descricao),
+            $("<td>").append(linkAcao)
         );
 
         linha.appendTo("#tabela");
